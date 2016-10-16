@@ -3,26 +3,21 @@ using System.Collections;
 
 public enum BlockID{
     None,
-    Core,
     Common,
-    Thruster,
+    Core,
     Shield,
-
+    Thruster,
+    Weapon
 }
 
-public class Block{
+public class MapElement { 
 
-    private BlockID knd;
+    public BlockID knd;
+    public int rotate;
 
-    Block()
+    public MapElement()
     {
         knd = BlockID.None;
-    }
-
-
-    public void setKnd(BlockID knd)
-    {
-        this.knd = knd;
     }
 
     public void setColor(Color color)
