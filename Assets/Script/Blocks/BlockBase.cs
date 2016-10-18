@@ -1,20 +1,17 @@
 ﻿using UnityEngine;
 using System.Collections;
 
-enum BlockRotate
-{
-    UP,
-    RIGHT,
-    DOWN,
-    LEFT
-}
-
 public abstract class BlockBase : MonoBehaviour {
     
     protected int HP { get; set; }
     protected bool[] connect = new bool[4];
 
     protected int rotate=0;
+
+    public BlockBase(int rot)
+    {
+        rotate = rot;
+    }
 
     // Use this for initialization
     void Start()
@@ -47,6 +44,11 @@ public abstract class BlockBase : MonoBehaviour {
         {
             Killd();
         }
+    }
+
+    public bool canPlace(BlockRotate dir)
+    {
+        return connect[(int)dir-rotate];
     }
 
     void OnTriggerEnter2D(Collider2D c)

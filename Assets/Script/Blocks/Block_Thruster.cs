@@ -10,11 +10,8 @@ public class Block_Thruster : BlockBase
 
     private KeyCode key;
 
-    protected override void Init()
+    public Block_Thruster(int rot) : base(rot)
     {
-        HP = 50;
-        speed = 1;
-        myRigid = GetComponent<Rigidbody2D>();
         switch (rotate)
         {
             case (int)BlockRotate.DOWN:
@@ -30,10 +27,17 @@ public class Block_Thruster : BlockBase
                 key = KeyCode.W;
                 break;
         }
-        connect[(int)BlockRotate.DOWN] = false;
-        connect[(int)BlockRotate.UP] = false;
-        connect[(int)BlockRotate.RIGHT] = false;
-        connect[(int)BlockRotate.LEFT] = true;
+        connect[(int)BlockRotate.DOWN - rotate] = false;
+        connect[(int)BlockRotate.UP - rotate] = true;
+        connect[(int)BlockRotate.RIGHT - rotate] = false;
+        connect[(int)BlockRotate.LEFT - rotate] = false;
+    }
+
+    protected override void Init()
+    {
+        HP = 50;
+        speed = 1;
+        myRigid = GetComponent<Rigidbody2D>();
     }
 
     protected override void Update2()

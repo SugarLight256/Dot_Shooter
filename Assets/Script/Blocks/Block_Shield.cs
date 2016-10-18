@@ -8,16 +8,21 @@ public class Block_Shield : BlockBase {
 
     private float shieldCool;
 
+    public Block_Shield(int rot) : base(rot)
+    {
+
+    }
+
     protected override void Init()
     {
         HP = 100;
         shieldPowerMax = 10;
         shieldCool = 10;
         shieldPower = shieldPowerMax;
-        connect[(int)BlockRotate.DOWN] = false;
-        connect[(int)BlockRotate.UP] = false;
-        connect[(int)BlockRotate.RIGHT] = false;
-        connect[(int)BlockRotate.LEFT] = true;
+        connect[(int)BlockRotate.DOWN - rotate] = true;
+        connect[(int)BlockRotate.UP - rotate] = false;
+        connect[(int)BlockRotate.RIGHT - rotate] = false;
+        connect[(int)BlockRotate.LEFT - rotate] = false;
         StartCoroutine(shieldHealing());
     }
 
