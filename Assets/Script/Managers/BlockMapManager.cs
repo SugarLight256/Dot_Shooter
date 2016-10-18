@@ -28,6 +28,8 @@ public class BlockMapManager : MonoBehaviour {
         BlockMap[ConstData.MAP_SIZE/2 + x, ConstData.MAP_SIZE/2 + y].rotate = rotate;
         tmpObj = (GameObject)Instantiate(BlockList[(int)knd], new Vector2(x, y), transform.rotation);
         tmpObj.transform.SetParent(Player.transform);
+        tmpObj.transform.Rotate(new Vector3(0,0,rotate * 90));
+        tmpObj.GetComponent<BlockBase>().setRot(rotate);
         tmpObj.GetComponent<FixedJoint2D>().connectedBody = Player.GetComponent<Rigidbody2D>();
     }
 

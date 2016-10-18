@@ -19,7 +19,10 @@ public class Chips : MonoBehaviour {
 	
 	// Update is called once per frame
 	void Update () {
-	
+        if (Input.GetKeyDown(KeyCode.R))
+        {
+            RotateOnce();
+        }
 	}
 
     private void gridMove()
@@ -36,6 +39,19 @@ public class Chips : MonoBehaviour {
         return false;
     }
 
+    public void RotateOnce()
+    {
+        rotate = ++rotate % 4;
+        transform.Rotate(new Vector3(0,0,90));
+    }
+
+    public void RotateN(int n)
+    {
+        rotate += n;
+        rotate %= 4;
+        transform.rotation = Quaternion.Euler(new Vector3(0,0,90 * n));
+    }
+
     void OnMouseDrag()
     {
         Vector3 newPos = Camera.main.ScreenToWorldPoint(Input.mousePosition);
@@ -48,7 +64,7 @@ public class Chips : MonoBehaviour {
 
     void OnMouseUp()
     {
-        panel.rePlaceChip(knd);
+        panel.rePlaceChip(knd, rotate);
         if (isOnGrid())
         {
             MapManager.setBlock((int)Mathf.Round(transform.position.x), (int)Mathf.Round(transform.position.y), knd, rotate);

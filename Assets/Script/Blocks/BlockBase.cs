@@ -4,7 +4,7 @@ using System.Collections;
 public abstract class BlockBase : MonoBehaviour {
     
     protected int HP { get; set; }
-    protected bool[] connect = new bool[4];
+    protected bool[] connect;
 
     protected int rotate=0;
 
@@ -13,9 +13,15 @@ public abstract class BlockBase : MonoBehaviour {
         rotate = rot;
     }
 
+    public void setRot(int rot)
+    {
+        rotate = rot;
+    }
+
     // Use this for initialization
     void Start()
     {
+        connect = new bool[4] { false, false, false, false };
         Init();
     }
 

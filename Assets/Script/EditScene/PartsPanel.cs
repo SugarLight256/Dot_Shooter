@@ -32,11 +32,13 @@ public class PartsPanel : MonoBehaviour {
         transform.DOMove(new Vector3(overPos, 0, 0), 0.5f);
     }
 
-    public void rePlaceChip(BlockID knd)
+    public void rePlaceChip(BlockID knd, int rotate)
     {
         GameObject tmp;
         tmp = (GameObject)Instantiate(chipList[(int)knd]);
         tmp.transform.SetParent(transform);
         tmp.transform.localPosition = new Vector3(-7, 7 - (int)knd + 1, -1);
+        tmp.transform.Rotate(new Vector3(0, 0, 90 * rotate));
+        tmp.GetComponent<Chips>().RotateN(rotate);
     }
 }
